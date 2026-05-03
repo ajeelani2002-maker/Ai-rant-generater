@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔥 Viral Hook Generator</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #020617;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 { color: #facc15; }
+
+.box {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 420px;
+    margin: auto;
+}
+
+input, select {
+    width: 90%;
+    padding: 10px;
+    margin: 8px;
+    border-radius: 8px;
+    border: none;
+}
+
+button {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #facc15;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hook {
+    background: #0f172a;
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 10px;
+    position: relative;
+    text-align: left;
+}
+
+.copy {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: #22c55e;
+    padding: 5px;
+    font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🔥 Viral Hook Generator</h1>
+
+<div class="box">
+    <input id="topic" placeholder="Enter topic (e.g. success, school)">
+
+    <select id="platform">
+        <option>Shorts</option>
+        <option>TikTok</option>
+        <option>Reels</option>
+    </select>
+
+    <select id="style">
+        <option>controversial</option>
+        <option>curiosity</option>
+        <option>motivational</option>
+    </select>
+
+    <button onclick="generate()">Generate Hooks 🚀</button>
+</div>
+
+<div id="output"></div>
+
+<script>
+function pick(arr) {
+    return arr[Math.floor(Math.random()*arr.length)];
+}
+
+function generate() {
+
+    let topic = document.getElementById("topic").value || "this";
+    let style = document.getElementById("style").value;
+    let output = document.getElementById("output");
+
+    output.innerHTML = "";
+
+    let controversial = [
+        `Nobody wants to admit this about ${topic}...`,
+        `${topic} is the biggest lie right now.`,
+        `You're being lied to about ${topic}.`,
+        `This is why ${topic} is failing you.`,
+        `Everyone is wrong about ${topic}.`
+    ];
+
+    let curiosity = [
+        `This one thing about ${topic} changes everything...`,
+        `You won’t believe this about ${topic}...`,
+        `This secret about ${topic} is insane.`,
+        `What nobody told you about ${topic}...`,
+        `This might change how you see ${topic} forever.`
+    ];
+
+    let motivational = [
+        `This is your sign to fix ${topic}.`,
+        `You’re one step away from mastering ${topic}.`,
+        `Start taking ${topic} seriously today.`,
+        `This is why you must focus on ${topic}.`,
+        `If you care about your future, fix ${topic}.`
+    ];
+
+    let pool = style === "controversial" ? controversial :
+               style === "curiosity" ? curiosity :
+               motivational;
+
+    for (let i = 0; i < 10; i++) {
+        let text = pick(pool);
+
+        let div = document.createElement("div");
+        div.className = "hook";
+
+        let btn = document.createElement("button");
+        btn.innerText = "Copy";
+        btn.className = "copy";
+        btn.onclick = () => navigator.clipboard.writeText(text);
+
+        div.innerText = text;
+        div.appendChild(btn);
+
+        output.appendChild(div);
+    }
+}
+</script>
+
+</body>
+      </html>
